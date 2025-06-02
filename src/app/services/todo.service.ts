@@ -13,7 +13,7 @@ export interface Todo {
 })
 export class TodoService {
 
-  private apiUrl = 'https://localhost:5001/api/todos'; // Or your actual backend URL
+  private apiUrl = 'https://localhost:5121/api/todos'; 
 
   constructor(private http: HttpClient) {}
 
