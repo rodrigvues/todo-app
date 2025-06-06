@@ -6,6 +6,6 @@
   --font-sans: "Inter", "sans-serif"; 
 }
 
-h1 {
+.transparent {
     -webkit-text-fill-color: transparent;
 }
