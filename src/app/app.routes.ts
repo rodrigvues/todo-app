@@ -17,13 +17,8 @@ export const routes: Routes = [
       import('./pages/todo-list/todo-list.component').then(m => m.TodoListComponent)
   },
   {
-    path: 'todos/new',
+    path: 'todos/overview',
     loadComponent: () =>
-      import('./pages/todo-form/todo-form.component').then(m => m.TodoFormComponent)
+      import('./pages/todo-overview/todo-overview.component').then(m => m.TodoOverview)
   },
-  {
-    path: 'todos/:id/edit',
-    loadComponent: () =>
-      import('./pages/todo-form/todo-form.component').then(m => m.TodoFormComponent)
-  }
 ];
