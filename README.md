@@ -16,8 +16,8 @@ Este projeto foi desenvolvido com o objetivo principal de ter o primeiro contato
 </p>
 
 <p align="center">
-  <img src="/assets/c.png" height="400" style="vertical-align: top; margin-right: 1%" alt="Lista de Tarefas">
-  <img src="/assets/d.png" height="400" alt="Lista de Tarefas (Mobile)">
+  <img src="/assets/c.png" height="300" style="margin-right: 1%; vertical-align: top;" alt="Lista de Tarefas">
+  <img src="/assets/d.png" height="300" style="vertical-align: top;" alt="Lista de Tarefas (Mobile)">
 </p>
 
 ---
