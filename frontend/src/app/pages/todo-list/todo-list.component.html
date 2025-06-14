@@ -1,0 +1,287 @@
+<div class="h-screen flex bg-[#63e] text-black">
+  <!-- sidebar -->
+  <button
+    (click)="toggleSidebar()"
+    type="button"
+    class="fixed top-4 left-4 z-50 inline-flex items-center justify-center p-2 text-white bg-purple-700 rounded-lg sm:hidden hover:bg-purple-800 focus:outline-none"
+  >
+    <i class="pi pi-bars" style="font-size: 0.6rem"></i>
+  </button>
+
+  <aside
+    [ngClass]="{
+      'translate-x-0': isSidebarOpen,
+      '-translate-x-full': !isSidebarOpen
+    }"
+    class="fixed top-0 left-0 z-40 w-16 h-screen transition-transform sm:translate-x-0 bg-white border-r border-gray-200"
+    aria-label="Sidenav"
+  >
+    <div class="overflow-y-auto py-5 px-3 h-full">
+      <ul class="space-y-2">
+        <li>
+          <a
+            href="/home"
+            class="inline-flex justify-center items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100"
+          >
+            <i class="pi pi-angle-left text-lg text-gray-500"></i>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/todos"
+            class="inline-flex justify-center items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100"
+          >
+            <i class="pi pi-check-square text-lg text-gray-500"></i>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/todos/overview"
+            class="inline-flex justify-center items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100"
+          >
+            <i class="pi pi-chart-scatter text-lg text-gray-500"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200">
+        <li>
+          <a
+            (click)="openCreateDialog()"
+            class="inline-flex justify-center items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 cursor-pointer"
+          >
+            <i class="pi pi-plus text-lg text-gray-500"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div
+      class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-white border-r border-gray-200"
+    >
+      <a
+        href="#"
+        class="inline-flex justify-center p-2 text-gray-500 rounded hover:text-gray-900 hover:bg-gray-100"
+      >
+        <i class="pi pi-question text-xl"></i>
+      </a>
+    </div>
+  </aside>
+
+  <!-- conteúdo principal dos todos -->
+  <div class="flex flex-col flex-1 sm:ml-16 w-full overflow-hidden">
+    <div class="flex-1 px-4 py-6 overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
+        <!-- todos -->
+        <div
+          class="bg-white rounded-2xl shadow-lg p-4 flex flex-col h-full overflow-hidden"
+        >
+          <!-- dialog pra confirmar delete -->
+          <p-confirmDialog></p-confirmDialog>
+          <!-- dialog pra editar -->
+          <p-dialog
+            header="Editar Tarefa"
+            [(visible)]="editDialogVisible"
+            [modal]="true"
+            [style]="{ width: '25rem' }"
+          >
+            <div class="flex flex-col gap-4">
+              <label for="editTitle" class="font-semibold">Título</label>
+              <input
+                pInputText
+                id="editTitle"
+                [(ngModel)]="selectedTodo.title"
+              />
+              <div class="flex justify-end gap-2">
+                <p-button
+                  label="Cancelar"
+                  severity="secondary"
+                  (click)="editDialogVisible = false"
+                />
+                <p-button label="Salvar" (click)="saveTodo()" />
+              </div>
+            </div>
+          </p-dialog>
+          <!-- dialog pra criar tarefa -->
+          <p-dialog
+            header="Nova Tarefa"
+            [(visible)]="createDialogVisible"
+            [modal]="true"
+            [style]="{ width: '25rem' }"
+          >
+            <div class="flex flex-col gap-4">
+              <label for="newTitle" class="font-semibold">Título</label>
+              <input
+                pInputText
+                id="newTitle"
+                [(ngModel)]="newTodoTitle"
+                placeholder="Digite o título da tarefa"
+              />
+
+              <div class="flex justify-end gap-2">
+                <p-button
+                  label="Cancelar"
+                  severity="secondary"
+                  (click)="createDialogVisible = false"
+                />
+
+                <p-button
+                  label="Criar"
+                  [disabled]="!newTodoTitle.trim()"
+                  (click)="createTodo()"
+                />
+              </div>
+            </div>
+          </p-dialog>
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-gray-800 flex items-center">
+              <i class="pi pi-list text-purple-600 mr-2 text-2xl"></i> Todos
+            </h2>
+            <i
+              class="pi pi-plus-circle text-gray-400 hover:text-purple-600 cursor-pointer duration-300 ease-out"
+              style="font-size: 1.3rem"
+              (click)="openCreateDialog()"
+            ></i>
+          </div>
+          <div class="flex-1 overflow-y-auto space-y-4 pr-2">
+            <div
+              *ngIf="todos.length === 0"
+              class="text-gray-500 text-sm flex-1 overflow-auto"
+            >
+              Nada a ser feito.
+            </div>
+            <div
+              *ngFor="let todo of todos"
+              class="p-4 bg-purple-50 rounded-lg shadow-sm flex justify-between items-center"
+            >
+              <span>{{ todo.title }}</span>
+              <p-popover #popover [dismissable]="true">
+                <ng-template pTemplate="content">
+                  <div class="flex flex-col gap-4">
+                    <div>
+                      <span class="font-medium block mb-2">Opções</span>
+                      <ul class="list-none p-0 m-0 flex flex-col">
+                        <li
+                          class="flex items-center gap-2 px-2 py-3 hover:bg-emphasis cursor-pointer rounded-[0.40rem] hover:bg-purple-50 duration-300 ease-in-out"
+                          (click)="openEditDialog(todo); popover.hide()"
+                        >
+                          <i
+                            class="pi pi-pencil text-gray-700 text-lg cursor-pointer ml-0.5"
+                          ></i>
+                          <div>
+                            <span class="font-medium">Editar Tarefa</span>
+                          </div>
+                        </li>
+                        <li
+                          class="flex items-center gap-2 px-2 py-3 hover:bg-emphasis cursor-pointer rounded-[0.40rem] hover:bg-purple-50 duration-300 ease-in-out"
+                          (click)="confirmDelete(todo.id); popover.hide()"
+                        >
+                          <i
+                            class="pi pi-trash text-red-600 text-lg cursor-pointer ml-0.5"
+                          ></i>
+                          <div>
+                            <span class="font-medium">Deletar Tarefa</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-popover>
+              <div class="flex items-center gap-3">
+                <i
+                  class="pi pi-ellipsis-v text-gray-500 cursor-pointer hover:text-gray-700 duration-300 ease-out"
+                  (click)="togglePopover($event, todo, popover)"
+                >
+                </i>
+                <i
+                  class="pi text-green-600 cursor-pointer"
+                  (click)="markAsDone(todo)"
+                  [ngClass]="hovered[todo.id] ? 'pi-check-circle' : 'pi-circle'"
+                  (mouseenter)="hovered[todo.id] = true"
+                  (mouseleave)="hovered[todo.id] = false"
+                >
+                </i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- done -->
+        <div
+          class="bg-white rounded-2xl shadow-lg p-4 flex flex-col h-full overflow-hidden"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-gray-800 flex items-center">
+              <i class="pi pi-list-check text-purple-600 mr-2 text-2xl"></i>
+              Done
+            </h2>
+          </div>
+
+          <div class="flex-1 overflow-y-auto space-y-4 pr-2">
+            <div
+              *ngIf="dones.length === 0"
+              class="text-gray-500 text-sm flex-1 overflow-auto"
+            >
+              Nada concluído ainda.
+            </div>
+
+            <div
+              *ngFor="let done of dones"
+              class="p-4 bg-purple-50 rounded-lg shadow-sm flex justify-between items-center"
+            >
+              <span>{{ done.title }}</span>
+              <p-popover #popover [dismissable]="true">
+                <ng-template pTemplate="content">
+                  <div class="flex flex-col gap-4">
+                    <div>
+                      <span class="font-medium block mb-2">Opções</span>
+                      <ul class="list-none p-0 m-0 flex flex-col">
+                        <li
+                          class="flex items-center gap-2 px-2 py-3 hover:bg-emphasis cursor-pointer rounded-[0.40rem] hover:bg-purple-50 duration-300 ease-in-out"
+                          (click)="openEditDialog(done); popover.hide()"
+                        >
+                          <i
+                            class="pi pi-pencil text-gray-700 text-lg cursor-pointer ml-0.5"
+                          ></i>
+                          <div>
+                            <span class="font-medium">Editar Tarefa</span>
+                          </div>
+                        </li>
+                        <li
+                          class="flex items-center gap-2 px-2 py-3 hover:bg-emphasis cursor-pointer rounded-[0.40rem] hover:bg-purple-50 duration-300 ease-in-out"
+                          (click)="confirmDelete(done.id); popover.hide()"
+                        >
+                          <i
+                            class="pi pi-trash text-red-600 text-lg cursor-pointer ml-0.5"
+                          ></i>
+                          <div>
+                            <span class="font-medium">Deletar Tarefa</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-popover>
+              <div class="flex items-center gap-3">
+                <i
+                  class="pi pi-ellipsis-v text-gray-500 cursor-pointer hover:text-gray-700 duration-300 ease-out"
+                  (click)="togglePopover($event, done, popover)"
+                >
+                </i>
+                <i
+                  class="pi text-green-600 cursor-pointer"
+                  (click)="markAsUndone(done)"
+                  [ngClass]="hovered[done.id] ? 'pi-circle' : 'pi-check-circle'"
+                  (mouseenter)="hovered[done.id] = true"
+                  (mouseleave)="hovered[done.id] = false"
+                >
+                </i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

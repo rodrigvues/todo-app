@@ -1,0 +1,167 @@
+
+<div class="min-h-screen flex flex-col items-center justify-center  text-black p-6 text-center ">
+  <header class="fixed top-0 left-0 w-full z-50">
+    <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+            <a href="/" class="flex items-center">
+          
+                <span class="self-center text-xl font-semibold whitespace-nowrap text-[#63e] hover:text-[#615485]   transition-colors duration-300 ease-in-out  mr-16  ">Todo</span>
+            </a>
+            <div class="flex items-center lg:order-2">
+                
+                <a href="#" [routerLink]="['/todos']" class="text-white bg-[#63e] hover:bg-[#615485] focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5    focus:outline-none transition-colors duration-300 ease-in-out ">Começar</a>
+                
+            </div>
+            <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                    <li>
+                        <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b    hover:text-[#63e] lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 transition-colors duration-300 ease-in-out">Home</a>
+                    </li>
+                    <li>
+                        <a href="/home#features" class="block py-2 pr-4 pl-3 text-gray-700 border-b  hover:text-[#63e] lg:hover:bg-transparent lg:border-0 transition-colors duration-300 ease-in-out lg:hover:text-primary-700 lg:p-0     ">Features</a>
+                    </li>
+                    <li>
+                        <a href="/home#sobre" class="block py-2 pr-4 pl-3 text-gray-700 border-b        hover:text-[#63e] lg:hover:bg-transparent transition-colors duration-300 ease-in-out lg:border-0  lg:hover:text-primary-700 lg:p-0 ">Sobre</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+  <div class="absolute inset-0 -z-10 h-full w-full  [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)]"></div>
+  
+  <h1 class="h1 text-2xl md:text-5xl font-medium mb-6   bg-gradient-to-r from-gray-950 via-gray-600 to-gray-800 bg-clip-text leading-[1.2] transparent ">Aumente sua produtividade, <br/>Organize seus pensamentos</h1>
+    <p class="text-sm text-gray-500 md:text-lg mb-6 md:max-w-xl max-w-2xs">
+    Organização simples e eficiente, organize o que deve ser organizado de forma prática
+    </p>
+    <p-button
+      label="Comece hoje"
+      [routerLink]="['/todos']"
+      icon="pi pi-arrow-right"
+      iconPos="right"
+      severity="contrast"
+    />
+</div>
+<section id="features" class="bg-white ">
+  <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-8 mt-8">
+      <div class=" mb-8 lg:mb-16 justify-center content-center">
+          <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center content-center bg-gradient-to-r from-[#63e] to-gray-200 via-[#63e] bg-clip-text leading-[1.2] transparent ">Organização, simples</h2>
+          <p class="text-gray-500 sm:text-xl text-center content-center ">Faça o simples de forma simples. <br/>Entenda o que o Todo faz para você.</p>
+      </div>
+      <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-16 md:space-y-0 mb-8">
+  <div>
+    <div class="flex justify-center items-center mb-4  h-12 rounded-full bg-primary-100">
+      <i class="pi pi-plus-circle" style="font-size: 2rem; color: #6633ee;"></i>
+    </div>
+    <h3 class="mb-2 text-xl font-bold text-[#63e] text-center">Crie</h3>
+    <p class="text-gray-500 text-center">Adicione tarefas para serem concluídas</p>
+  </div>
+
+  <div>
+    <div class="flex justify-center items-center mb-4  h-12 rounded-full bg-primary-100">
+      <i class="pi pi-book" style="font-size: 2rem; color: #6633ee;"></i>
+    </div>
+    <h3 class="mb-2 text-xl font-bold text-[#63e] text-center">Consulte</h3>
+    <p class="text-gray-500 text-center">Veja quais tarefas tem a serem feitas</p>
+  </div>
+
+  <div>
+    <div class="flex justify-center items-center mb-4  h-12 rounded-full bg-primary-100">
+      <i class="pi pi-pencil" style="font-size: 2rem; color: #6633ee;"></i>
+    </div>
+    <h3 class="mb-2 text-xl font-bold text-[#63e] text-center">Edite</h3>
+    <p class="text-gray-500 text-center">Edite as tarefas para ficarem do jeito que quer</p>
+  </div>
+
+  <div>
+    <div class="flex justify-center items-center mb-4  h-12 rounded-full bg-primary-100">
+      <i class="pi pi-list-check" style="font-size: 2rem; color: #6633ee; "></i>
+    </div>
+    <h3 class="mb-2 text-xl font-bold text-[#63e] text-center">Complete</h3>
+    <p class="text-gray-500 text-center">Complete as tarefas e as tire da lista de atividades a serem feitas</p>
+  </div>
+</div>
+
+
+  </div>
+</section>
+
+
+<section class="bg-white " id="sobre">
+    <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
+        <div class="font-light text-gray-500 sm:text-lg ">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold bg-gradient-to-r from-[#63e] via-[#6533ee80] to-[#63e] bg-clip-text leading-[1.2] transparent ">Saiba mais</h2>
+            <p class="mb-4">O Todo é um web app desenvolvido por Vitor Rodrigues para estudar linguagens como .NET e Angular, além de banco de dados PostGres. Um simples CRUD de tarefas com foco no front end.</p>
+            <p>O foco é aprender as linguagens e a conexão delas, usando Swagger, Prime NG e pgAdmin no processo de aprendizado.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mt-8">
+            <img class="w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png" alt="office content 1">
+            <img class="mt-4 w-full lg:mt-10 rounded-lg" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png" alt="office content 2">
+        </div>
+    </div>
+</section>
+<section class="bg-[#63e] ">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+        <div class="mx-auto max-w-screen-sm text-center">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold leading-tight text-white ">Dá uma ⭐</h2>
+            <a href="https://github.com/rodrigvues/todo-app">
+                <p-button
+                label="Repositório no Github!"
+                
+                severity="secondary"
+            />
+            </a>
+            
+        </div>
+    </div>
+</section>
+<footer class="p-4 bg-gray-950 sm:p-6">
+    <div class="mx-auto max-w-screen-xl">
+        <div class="md:flex md:justify-between ">
+            <div class="mb-6 md:mb-0">
+                <a href="/" class="flex items-center">
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Todo</span>
+                </a>
+            </div>
+            <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                <div>
+                    <h2 class="mb-6 text-sm font-semibold text-white uppercase">Sobre</h2>
+                    <ul class="text-white">
+                        <li class="mb-4">
+                            <a href="/home#features" class="hover:underline">Recursos</a>
+                        </li>
+                        <li>
+                            <a href="/home#sobre" class="hover:underline">Sobre</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="mb-6 text-sm font-semibold text-white uppercase">Repositório</h2>
+                    <ul class="text-white">
+                        <li class="mb-4">
+                            <a href="https://github.com/rodrigvues/todo-app" class="hover:underline">Github</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="mb-6 text-sm font-semibold text-white uppercase">Termos</h2>
+                    <ul class="text-white">
+                        <li class="mb-4">
+                            <a href="#" class="hover:underline">Privacidade</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:underline">Termos &amp; Condições</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr class="my-6 border-white sm:mx-auto lg:my-8" />
+        <div class="sm:flex sm:items-center sm:justify-between">
+            <span class="text-sm text-white sm:text-center">© 2025 <a href="/" class="hover:underline">Todo™</a>. All Rights Reserved.</span>
+            
+        </div>
+    </div>
+</footer>
+

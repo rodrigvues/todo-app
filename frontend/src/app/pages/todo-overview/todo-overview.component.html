@@ -1,0 +1,70 @@
+<div
+  class="min-h-screen flex flex-col items-center justify-center text-black p-6 text-center bg-[#63e]"
+>
+  <!-- sidebar -->
+  <button
+    (click)="toggleSidebar()"
+    type="button"
+    class="fixed top-4 left-4 z-50 inline-flex items-center justify-center p-2 text-white bg-purple-700 rounded-lg sm:hidden hover:bg-purple-800 focus:outline-none"
+  >
+    <i class="pi pi-bars" style="font-size: 0.6rem"></i>
+  </button>
+
+  <aside
+    [ngClass]="{
+      'translate-x-0': isSidebarOpen,
+      '-translate-x-full': !isSidebarOpen
+    }"
+    class="fixed top-0 left-0 z-40 w-16 h-screen transition-transform sm:translate-x-0 bg-white border-r border-gray-200"
+    aria-label="Sidenav"
+  >
+    <div class="overflow-y-auto py-5 px-3 h-full">
+      <ul class="space-y-2">
+        <li>
+          <a
+            href="/home"
+            class="inline-flex justify-center items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100"
+          >
+            <i class="pi pi-angle-left text-lg text-gray-500"></i>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/todos"
+            class="inline-flex justify-center items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100"
+          >
+            <i class="pi pi-check-square text-lg text-gray-500"></i>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/todos/overview"
+            class="inline-flex justify-center items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100"
+          >
+            <i class="pi pi-chart-scatter text-lg text-gray-500"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200">
+        <li>
+          <a
+            class="inline-flex justify-center items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 cursor-pointer"
+          >
+            <i class="pi pi-plus text-lg text-gray-500"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div
+      class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-white border-r border-gray-200"
+    >
+      <a
+        href="#"
+        class="inline-flex justify-center p-2 text-gray-500 rounded hover:text-gray-900 hover:bg-gray-100"
+      >
+        <i class="pi pi-question text-xl"></i>
+      </a>
+    </div>
+  </aside>
+</div>
